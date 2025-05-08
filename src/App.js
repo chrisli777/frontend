@@ -1,57 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ElderCheckInPage from './component/ElderCheckInPage';
 import CaregiverDashboard from './component/CaregiverDashboard';
 import FamilyDashboard from './component/FamilyDashboard';
-import ChatPage from './component/ChatPage';
 import ElderProfilePage from './component/ElderProfilePage';
+import LoginPage from './component/Login';
 
 function App() {
-  const [page, setPage] = useState('caregiver'); // default view
-
   return (
-    <div>
-      <nav style={navStyle}>
-        <button onClick={() => setPage('caregiver')} style={navBtnStyle}>
-          Caregiver Dashboard
-        </button>
-        <button onClick={() => setPage('elder')} style={navBtnStyle}>
-          Elder Check-In
-        </button>
-        <button onClick={() => setPage('family')} style={navBtnStyle}>
-          Family Dashboard
-        </button>
-        <button onClick={() => setPage('chat')} style={navBtnStyle}>
-          Chat Page
-        </button>
-        <button onClick={() => setPage('profile')} style={navBtnStyle}>
-          Elder Profile
-          </button>
-      </nav>
+    <Router>
+      <Routes>
+        {/* Show LoginPage at startup */}
+        <Route path="/" element={<LoginPage />} />
 
-      {page === 'caregiver' && <CaregiverDashboard />}
-      {page === 'elder' && <ElderCheckInPage />}
-      {page === 'family' && <FamilyDashboard />}
-      {page === 'chat' && <ChatPage />}
-      {page === 'profile' && <ElderProfilePage />}
-    </div>
+        {/* Other routes after login */}
+        <Route path="/caregiver" element={<CaregiverDashboard />} />
+        <Route path="/family" element={<FamilyDashboard />} />
+        <Route path="/elder" element={<ElderCheckInPage />} />
+        <Route path="/profile" element={<ElderProfilePage />} />
+      </Routes>
+    </Router>
   );
 }
-
-const navStyle = {
-  padding: '10px',
-  background: '#007bff',
-  color: 'white',
-  display: 'flex',
-  gap: '10px',
-};
-
-const navBtnStyle = {
-  backgroundColor: 'white',
-  color: '#007bff',
-  border: 'none',
-  padding: '8px 12px',
-  borderRadius: '5px',
-  cursor: 'pointer',
-};
 
 export default App;

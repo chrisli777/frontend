@@ -1,5 +1,5 @@
 import React from 'react';
-import './ElderProfilePage.css';
+import Chat from "./chat"
 
 const ElderProfilePage = () => {
   return (
